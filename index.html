@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>NG-Filter</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="/materialize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script src='bower_components/angular/angular.js'></script>
+  <script src="./colors/colors.js"></script>
+  <script type="text/javascript">
+    let myApp = angular.module('app', []);
+    myApp.controller('colorApp', ['$scope', function ($scope) {
+        $scope.colorsName = colors;
+    }]);
+  </script>
+</head>
+<body ng-controller="colorApp">
+<div class="container">
+  <div class="input-field">
+    <input class="validate" id="searchColor" type="text" ng-model="colorSearch">
+    <label for="searchColor">Search Colors</label>
+  </div>
+  <table class="striped">
+    <thead>
+    <tr>
+      <th data-field="id">Color Name</th>
+      <th data-field="name">Hex</th>
+      <th data-field="price">Color</th>
+      <th data-field="price">Shades</th>
+      <th data-field="price">Mix</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="(key, value) in colorsName | filter: colorSearch">
+      <td>{{value.name}}</td>
+      <td>{{value.value}}</td>
+      <td style="background: {{value.value}}"></td>
+      <td><a href="#">Shades</a></td>
+      <td><a href="#">Mix</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
